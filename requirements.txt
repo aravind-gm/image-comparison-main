@@ -1,0 +1,14 @@
+# Web Framework and API Tools
+Flask
+flask-cors
+
+# Machine Learning and Deep Learning (Core)
+torch
+torchvision
+
+# Scientific Computing, Image Handling, and Comparison
+numpy
+scipy
+Pillow  # Handles image reading (often installed with torch/cv2, but good to explicitly include)
+opencv-python # Used for any specific image preprocessing (optional if only using PIL/Torchvision)
+gunicorn

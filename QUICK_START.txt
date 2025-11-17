@@ -1,0 +1,94 @@
+=============================================================
+           🚀 QUICK START - NeuralVision AI 🚀
+=============================================================
+
+              Image Similarity Analyzer
+         Using Deep Learning (ResNet-50)
+
+=============================================================
+
+📋 STEPS TO RUN:
+
+1. 📦 FIRST TIME ONLY - Install Dependencies
+   
+   Double-click: INSTALL.bat
+   
+   (Wait for installation to complete - may take 2-5 minutes)
+
+2. ▶️ RUN THE APPLICATION
+   
+   Double-click: START_APP.bat
+   
+   That's it! 🎉
+
+=============================================================
+
+🎯 WHAT HAPPENS:
+
+✅ Backend server starts on http://127.0.0.1:5000
+✅ Frontend opens in your browser
+✅ Ready to compare images!
+
+=============================================================
+
+💡 HOW TO USE:
+
+1. Upload first image (Source)
+2. Upload second image (Target)  
+3. Click "Analyze Similarity"
+4. View results (0-100% similarity)
+
+=============================================================
+
+🎨 FEATURES:
+
+• Drag & drop images
+• Real-time processing
+• Beautiful animated UI
+• Color-coded results
+• Mobile responsive
+
+=============================================================
+
+👥 DEVELOPMENT TEAM:
+
+Team Lead: Aravind GM
+
+Team Members:
+• Farha Nazz
+• Manayatha
+• Rithick
+• Pranav Jain
+
+=============================================================
+
+📁 FILE STRUCTURE:
+
+START_APP.bat     ⭐ Main launcher (USE THIS!)
+INSTALL.bat       📦 Install dependencies (first time)
+README.md         📖 Full documentation
+DEPLOYMENT_GUIDE  🚀 Deployment instructions
+
+=============================================================
+
+❓ TROUBLESHOOTING:
+
+Problem: "Python not found"
+Solution: Install Python from python.org
+
+Problem: "Cannot connect to server"
+Solution: Make sure START_APP.bat is running
+
+Problem: Images won't upload
+Solution: Use JPG/PNG files under 10MB
+
+For more help, see DEPLOYMENT_GUIDE.md
+
+=============================================================
+
+🌟 ENJOY USING NEURALVISION AI! 🌟
+
+© 2025 NeuralVision AI Team
+All Rights Reserved
+
+=============================================================

@@ -1,0 +1,114 @@
+=============================================================
+        📊 DEPLOYMENT OPTIONS COMPARISON
+=============================================================
+
+🖥️  LOCAL DEPLOYMENT (START_APP.bat)
+-------------------------------------------------------------
+✅ Runs on your computer
+✅ Fast (no internet latency)
+✅ Free
+✅ Full control
+✅ Private
+✅ Easy to debug
+
+❌ Only accessible from your computer
+❌ Computer must stay on
+❌ Can't share with others easily
+❌ No public URL
+
+BEST FOR: Development, testing, personal use
+
+COMMAND: Double-click START_APP.bat
+
+=============================================================
+
+☁️  CLOUD DEPLOYMENT (DEPLOY_TO_VERCEL.bat)
+-------------------------------------------------------------
+✅ Accessible from anywhere in the world
+✅ Share with anyone via URL
+✅ Always online (24/7)
+✅ Professional URL
+✅ Automatic scaling
+✅ No server maintenance
+
+❌ Slight latency (internet speed)
+❌ Cold starts (first request slow)
+❌ May have usage limits (free tier)
+❌ Requires internet
+
+BEST FOR: Sharing, demos, production, portfolio
+
+COMMAND: Double-click DEPLOY_TO_VERCEL.bat
+
+=============================================================
+
+📋 WHEN TO USE WHICH?
+=============================================================
+
+USE LOCAL (START_APP.bat) WHEN:
+• You're developing/testing
+• You want fastest performance
+• You don't need to share
+• You're in a presentation (offline)
+• You want privacy
+
+USE CLOUD (DEPLOY_TO_VERCEL.bat) WHEN:
+• You want to share with others
+• You need 24/7 availability
+• You want a portfolio piece
+• You're demoing remotely
+• You want a professional URL
+
+=============================================================
+
+💡 PRO TIP: Use Both!
+=============================================================
+
+1. Develop locally: START_APP.bat
+   (Fast testing and development)
+
+2. Deploy to cloud: DEPLOY_TO_VERCEL.bat
+   (Share and showcase)
+
+=============================================================
+
+🎯 QUICK REFERENCE
+=============================================================
+
+Local Access:
+http://127.0.0.1:5000 (only you)
+
+Cloud Access:
+https://your-app.vercel.app (everyone)
+
+=============================================================
+
+📁 FILES YOU NEED
+=============================================================
+
+For Local:
+├── START_APP.bat          ⭐ Main launcher
+├── INSTALL.bat            📦 Install once
+├── requirements.txt
+├── api/
+└── public/
+
+For Cloud:
+├── DEPLOY_TO_VERCEL.bat   ☁️ Cloud deploy
+├── vercel.json            ⚙️ Config (already set!)
+├── requirements.txt
+├── api/
+└── public/
+
+(Same files, different usage!)
+
+=============================================================
+
+👥 TEAM
+=============================================================
+Lead: Aravind GM
+Team: Farha Nazz, Manayatha, Rithick, Pranav Jain
+
+=============================================================
+
+© 2025 NeuralVision AI
