@@ -1,6 +1,7 @@
 # Netlify configuration for NeuralVision AI Frontend
 
 [build]
+  base = ""
   publish = "public"
   command = "echo 'No build needed - static site'"
 
