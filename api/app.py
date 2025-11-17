@@ -13,7 +13,7 @@ import os
 # --- Configuration ---
 app = Flask(__name__)
 # Enable CORS for all origins (allows Netlify, local, and other frontends to access the API)
-CORS(app, origins=['*'], supports_credentials=True) 
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"], "allow_headers": ["Content-Type"]}}, supports_credentials=False) 
 
 # --- API Endpoints ---
 
