@@ -12,16 +12,35 @@ import os
 
 # --- Configuration ---
 app = Flask(__name__)
-CORS(app) 
+# Enable CORS for all origins (allows Netlify, local, and other frontends to access the API)
+CORS(app, origins=['*'], supports_credentials=True) 
 
-# --- API Endpoint for Comparison ---
+# --- API Endpoints ---
 
-@app.route('/api/compare', methods=['POST'])
+@app.route('/', methods=['GET'])
+def home():
+    """
+    Root endpoint - API health check
+    """
+    return jsonify({
+        "status": "running",
+        "message": "NeuralVision AI Backend API",
+        "version": "1.0.0",
+        "model": "MobileNetV2",
+        "endpoints": {
+            "/api/compare": "POST - Compare two images"
+        }
+    }), 200
+
+@app.route('/api/compare', methods=['POST', 'OPTIONS'])
 def compare_two_images():
     """
     Handles two image uploads, sends them to the comparison logic, 
     and returns a single similarity score.
     """
+    # Handle preflight OPTIONS request for CORS
+    if request.method == 'OPTIONS':
+        return '', 204
     # 1. Validate Both Files
     if 'image1' not in request.files or 'image2' not in request.files:
         return jsonify({"error": "Missing one or both image files ('image1', 'image2')"}), 400
