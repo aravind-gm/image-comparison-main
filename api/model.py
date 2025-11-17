@@ -17,17 +17,24 @@ TRANSFORM = transforms.Compose([
 ])
 
 def load_feature_extractor():
-    """Loads a pre-trained PyTorch model (ResNet-50) and cuts off the final layer."""
+    """
+    Loads a pre-trained PyTorch model (MobileNetV2) and cuts off the final layer.
     
-    # Use torch.hub to load ResNet-50 with best available weights
+    MobileNetV2 is used instead of ResNet-50 for lower memory usage (~14MB vs ~100MB).
+    This makes deployment on free-tier platforms (512MB RAM) possible.
+    
+    Trade-off: Slightly lower accuracy but still excellent for image similarity.
+    """
+    
+    # Use MobileNetV2 - much lighter than ResNet-50
     try:
-        model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V2)
+        model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.IMAGENET1K_V1)
     except AttributeError:
         # Fallback for older torch versions
-        model = models.resnet50(pretrained=True)
+        model = models.mobilenet_v2(pretrained=True)
     
     # Chop off the last fully-connected layer (which is for classification)
-    # We only want the output of the average pooling layer (2048-dim vector)
+    # We only want the output of the average pooling layer (1280-dim vector for MobileNetV2)
     model = torch.nn.Sequential(*(list(model.children())[:-1]))
     
     # Set the model to evaluation mode (turns off dropout, batch-norm updates, etc.)
@@ -36,7 +43,9 @@ def load_feature_extractor():
 
 def get_image_embedding(model, image_input):
     """
-    Generates a 2048-dimensional feature vector for a single image.
+    Generates a 1280-dimensional feature vector for a single image (MobileNetV2).
+    
+    Note: Changed from 2048-dim (ResNet-50) to 1280-dim (MobileNetV2) for lower memory usage.
     
     :param model: The PyTorch feature extractor model.
     :param image_input: An image path string or a file-like object (for uploads).
