@@ -6,6 +6,7 @@
     <title>NeuralVision AI | Image Similarity Engine</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="config.js"></script>
 </head>
 <body>
     <!-- Animated Particles Background -->
@@ -301,8 +302,8 @@
         });
 
         // Image Upload Logic
-        // Use deployed backend on Render (change to 'http://127.0.0.1:5000/api/compare' for local testing)
-        const API_ENDPOINT = 'https://neuralvision-ai.onrender.com/api/compare';
+        // Get API endpoint from config.js (easier to manage across environments)
+        const API_ENDPOINT = CONFIG.BACKEND_URL;
         const form = document.getElementById('uploadForm');
         const image1Input = document.getElementById('image1');
         const image2Input = document.getElementById('image2');
