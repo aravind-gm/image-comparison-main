@@ -2,7 +2,12 @@
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from comparison import compare_images  # Import the new comparison function
+try:
+    # When running as a module (gunicorn api.app:app)
+    from api.comparison import compare_images
+except ImportError:
+    # When running directly (python api/app.py)
+    from comparison import compare_images
 import os
 
 # --- Configuration ---
@@ -48,4 +53,5 @@ def compare_two_images():
 if __name__ == '__main__':
     print("Starting Flask server for Two-Image Comparison...")
     # NOTE: Run this first before testing the frontend
-    app.run(host='0.0.0.0', port=5000, debug=True, load_dotenv=False)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True, load_dotenv=False)

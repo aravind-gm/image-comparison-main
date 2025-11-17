@@ -1,0 +1,15 @@
+# NeuralVision AI - Deployment Configuration
+
+## Runtime
+python-3.9.18
+
+## Build Settings
+Build Command: pip install -r requirements.txt
+Start Command: gunicorn api.app:app
+
+## Environment Variables
+PYTHON_VERSION=3.9
+PORT=10000
+
+## Health Check
+Health Check Path: /
