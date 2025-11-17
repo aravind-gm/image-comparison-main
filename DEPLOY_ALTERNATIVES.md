@@ -236,6 +236,8 @@ Update `public/index.html`:
 const API_ENDPOINT = 'https://neuralvision-ai.onrender.com/api/compare';
 ```
 
+**Note:** If you encounter import errors, the code has been updated to handle both local and deployed environments automatically.
+
 ---
 
 ## 🆘 Still Having Issues?

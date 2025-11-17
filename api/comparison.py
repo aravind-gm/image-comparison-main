@@ -2,7 +2,12 @@
 
 import numpy as np
 from scipy.spatial.distance import cosine
-from model import load_feature_extractor, get_image_embedding
+try:
+    # When running as a module (gunicorn api.app:app)
+    from api.model import load_feature_extractor, get_image_embedding
+except ImportError:
+    # When running directly (python api/app.py)
+    from model import load_feature_extractor, get_image_embedding
 import io
 
 # Load the feature extractor model only once when the server starts
