@@ -8,7 +8,11 @@ try:
 except ImportError:
     # When running directly (python api/app.py)
     from comparison import compare_images
+except Exception as e:
+    print(f"Error importing comparison module: {e}")
+    compare_images = None
 import os
+import sys
 
 # --- Configuration ---
 app = Flask(__name__)
@@ -20,17 +24,44 @@ CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS
 @app.route('/', methods=['GET'])
 def home():
     """
-    Root endpoint - API health check
+    Root endpoint - API health check (lightweight, doesn't load model)
     """
+    import psutil
+    memory_info = psutil.Process().memory_info()
     return jsonify({
         "status": "running",
         "message": "NeuralVision AI Backend API",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "model": "MobileNetV2",
+        "memory_mb": round(memory_info.rss / 1024 / 1024, 2),
         "endpoints": {
-            "/api/compare": "POST - Compare two images"
+            "/api/compare": "POST - Compare two images",
+            "/health": "GET - Detailed health check"
         }
     }), 200
+
+@app.route('/health', methods=['GET'])
+def health():
+    """
+    Detailed health check endpoint
+    """
+    try:
+        import psutil
+        process = psutil.Process()
+        memory_info = process.memory_info()
+        return jsonify({
+            "status": "healthy",
+            "memory": {
+                "rss_mb": round(memory_info.rss / 1024 / 1024, 2),
+                "vms_mb": round(memory_info.vms / 1024 / 1024, 2)
+            },
+            "model_loaded": compare_images is not None
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "degraded",
+            "error": str(e)
+        }), 500
 
 @app.route('/api/compare', methods=['POST', 'OPTIONS'])
 def compare_two_images():
@@ -71,6 +102,8 @@ def compare_two_images():
 
 if __name__ == '__main__':
     print("Starting Flask server for Two-Image Comparison...")
+    print(f"Python version: {sys.version}")
+    print(f"Flask CORS enabled for all origins")
     # NOTE: Run this first before testing the frontend
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True, load_dotenv=False)
+    app.run(host='0.0.0.0', port=port, debug=False, load_dotenv=False)
