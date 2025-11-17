@@ -42,7 +42,7 @@
             </div>
             <p class="subtitle">Advanced Deep Learning Image Similarity Analysis</p>
             <div class="tech-specs">
-                <span class="spec-item"><span class="dot"></span> ResNet-50</span>
+                <span class="spec-item"><span class="dot"></span> MobileNetV2</span>
                 <span class="spec-item"><span class="dot"></span> Cosine Similarity</span>
                 <span class="spec-item"><span class="dot"></span> Real-time Processing</span>
             </div>
@@ -301,7 +301,8 @@
         });
 
         // Image Upload Logic
-        const API_ENDPOINT = 'http://127.0.0.1:5000/api/compare';
+        // Use deployed backend on Render (change to 'http://127.0.0.1:5000/api/compare' for local testing)
+        const API_ENDPOINT = 'https://neuralvision-ai.onrender.com/api/compare';
         const form = document.getElementById('uploadForm');
         const image1Input = document.getElementById('image1');
         const image2Input = document.getElementById('image2');
