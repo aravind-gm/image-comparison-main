@@ -26,14 +26,19 @@ def home():
     """
     Root endpoint - API health check (lightweight, doesn't load model)
     """
-    import psutil
-    memory_info = psutil.Process().memory_info()
+    try:
+        import psutil
+        memory_info = psutil.Process().memory_info()
+        memory_mb = round(memory_info.rss / 1024 / 1024, 2)
+    except:
+        memory_mb = "N/A"
+    
     return jsonify({
         "status": "running",
         "message": "NeuralVision AI Backend API",
         "version": "1.0.1",
         "model": "MobileNetV2",
-        "memory_mb": round(memory_info.rss / 1024 / 1024, 2),
+        "memory_mb": memory_mb,
         "endpoints": {
             "/api/compare": "POST - Compare two images",
             "/health": "GET - Detailed health check"
