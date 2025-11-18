@@ -1,7 +1,6 @@
 # /backend/app.py
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 try:
     # When running as a module (gunicorn api.app:app)
     from api.comparison import compare_images
@@ -16,15 +15,13 @@ import sys
 
 # --- Configuration ---
 app = Flask(__name__)
-# Enable CORS for all origins (allows Netlify, local, and other frontends to access the API)
-CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Add CORS headers to every response
+# Add CORS headers to every response (remove flask-cors to avoid header conflicts)
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS'
     return response 
 
 # --- API Endpoints ---

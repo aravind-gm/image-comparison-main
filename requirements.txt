@@ -1,6 +1,5 @@
 # Web Framework and API Tools
 Flask
-flask-cors
 
 # Machine Learning and Deep Learning (Core)
 torch
