@@ -1,6 +1,7 @@
 # /backend/app.py
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 try:
     # When running as a module (gunicorn api.app:app)
     from api.comparison import compare_images
@@ -16,12 +17,25 @@ import sys
 # --- Configuration ---
 app = Flask(__name__)
 
-# Add CORS headers to every response (remove flask-cors to avoid header conflicts)
+# Enable CORS for all routes with explicit configuration
+CORS(app, 
+     resources={r"/*": {
+         "origins": "*",
+         "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+         "allow_headers": ["Content-Type", "Authorization"],
+         "expose_headers": ["Content-Type"],
+         "max_age": 3600,
+         "supports_credentials": False
+     }}
+)
+
+# Additional CORS headers for extra compatibility
 @app.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS'
+    response.headers['Access-Control-Max-Age'] = '3600'
     return response 
 
 # --- API Endpoints ---
@@ -79,13 +93,9 @@ def compare_two_images():
     Handles two image uploads, sends them to the comparison logic, 
     and returns a single similarity score.
     """
-    # Handle preflight OPTIONS request for CORS
+    # Handle preflight OPTIONS request for CORS (Flask-CORS handles this, but for redundancy)
     if request.method == 'OPTIONS':
-        response = jsonify({'status': 'ok'})
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-        return response, 200
+        return '', 204
     # 1. Validate Both Files
     if 'image1' not in request.files or 'image2' not in request.files:
         return jsonify({"error": "Missing one or both image files ('image1', 'image2')"}), 400
