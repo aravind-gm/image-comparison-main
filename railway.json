@@ -1,0 +1,17 @@
+{
+  "version": "2",
+  "services": [
+    {
+      "name": "backend",
+      "buildCommand": "pip install -r requirements.txt",
+      "startCommand": "gunicorn api.app:app --workers 1 --threads 2 --timeout 300 --max-requests 1000 --max-requests-jitter 50",
+      "rootDirectory": ".",
+      "port": 3000,
+      "envPath": ".env",
+      "buildPacks": ["python"],
+      "healthcheckPath": "/health",
+      "healthcheckInterval": 10,
+      "healthcheckTimeout": 5
+    }
+  ]
+}
