@@ -84,7 +84,11 @@ def compare_two_images():
     """
     # Handle preflight OPTIONS request for CORS
     if request.method == 'OPTIONS':
-        return '', 204
+        response = jsonify({'status': 'ok'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        return response, 200
     # 1. Validate Both Files
     if 'image1' not in request.files or 'image2' not in request.files:
         return jsonify({"error": "Missing one or both image files ('image1', 'image2')"}), 400
