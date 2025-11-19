@@ -359,7 +359,7 @@ curl https://your-backend-url/health
 - Support: https://railway.app/support
 
 ### **From GitHub**
-- Repo: https://github.com/aravind-gm/image-comparison-main
+- Repo: https://github.com/hackerking05/image-comparison-main
 - Issues: Create issue with logs
 - Discussion: Ask community
 

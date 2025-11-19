@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="config.js"></script>
+    <style>
+        .result-match { 
+            font-size: 80px; 
+            color: #00ff00; 
+            font-weight: bold; 
+        }
+        .result-no-match { 
+            font-size: 80px; 
+            color: #ff0000; 
+            font-weight: bold; 
+        }
+    </style>
 </head>
 <body>
     <!-- Animated Particles Background -->
@@ -497,6 +509,26 @@
                 compareButton.querySelector('.button-text').textContent = 'Analyze Similarity';
             }
         });
+
+        async function compare() {
+            const formData = new FormData();
+            formData.append('image1', document.getElementById('image1').files[0]);
+            formData.append('image2', document.getElementById('image2').files[0]);
+
+            const response = await fetch(`${BACKEND_URL}/api/compare`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            const resultDiv = document.getElementById('result');
+            
+            if (data.match === 1) {
+                resultDiv.innerHTML = '<div class="result-match">✓ MATCH</div>';
+            } else {
+                resultDiv.innerHTML = '<div class="result-no-match">✗ NO MATCH</div>';
+            }
+        }
     </script>
 </body>
 </html>

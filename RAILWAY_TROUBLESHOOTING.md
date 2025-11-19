@@ -636,7 +636,7 @@ If you're completely stuck:
    - Railway Docs: https://docs.railway.app
    - Railway Support: https://railway.app/support
    - Stack Overflow tag: railway.app
-   - GitHub Issues: aravind-gm/image-comparison-main
+   - GitHub Issues: hackerking05/image-comparison-main
 
 3. **In message, include:**
    ```
